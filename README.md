@@ -1,89 +1,69 @@
-# Distributed-System-Games
+# Distributed System Games
 
-A collection of distributed system applications demonstrating different networking paradigms and concurrency patterns in Java.
+This repository contains two Java desktop applications built to demonstrate different distributed systems patterns:
 
-## 📋 Overview
+- `DictionaryGame`: a multi-client dictionary service over TCP sockets.
+- `WhiteBoardGame`: a collaborative whiteboard built on Java RMI callbacks.
 
-This project contains two fully-featured distributed applications built with Java, each showcasing different architectural approaches for networked systems:
+The repo was reorganized from older coursework submission folders into cleaner top-level game directories. The current source of truth is the code under `DictionaryGame/` and `WhiteBoardGame/`.
 
-1. **DictionaryGame** - A TCP socket-based multi-client dictionary service
-2. **WhiteBoardGame** - A collaborative whiteboard application using Java RMI
+## Repository Layout
 
-## 🎮 Projects
-
-### [DictionaryGame](./DictionaryGame/README.md)
-A distributed dictionary application where multiple clients can connect to a centralized server to perform CRUD operations on a shared, persistent word dictionary.
-
-- **Architecture**: TCP Sockets + JSON
-- **Key Features**: Multi-threaded server, persistent JSON storage, custom thread pool
-- **Use Case**: Demonstrates traditional client-server architecture and socket programming
-
-### [WhiteBoardGame](./WhiteBoardGame/README.md)
-A real-time collaborative whiteboard where a manager hosts a session and guests remotely join to draw together.
-
-- **Architecture**: Java RMI with RMI callbacks
-- **Key Features**: Real-time synchronization, collaborative drawing, user management
-- **Use Case**: Demonstrates distributed objects and stateful peer-to-peer communication
-
-## 🏗️ Directory Structure
-
-```
+```text
 Distributed-System-Games/
 ├── DictionaryGame/
-│   ├── source_file/
-│   │   ├── src/
-│   │   │   ├── client/          # Client implementation
-│   │   │   ├── server/          # Server implementation
-│   │   │   └── dictionary.json  # Data file
-│   │   └── lib/                 # Dependencies
+│   ├── lib/
+│   ├── src/
+│   ├── .classpath
+│   ├── .project
 │   └── README.md
-│
 ├── WhiteBoardGame/
-│   ├── COMP90015_A2_submitted_1638660/
-│   │   ├── src/
-│   │   │   ├── manager/         # Server/manager side
-│   │   │   ├── guest/           # Client/guest side
-│   │   │   ├── common/          # Shared components
-│   │   │   ├── remote/          # RMI interfaces
-│   │   │   ├── icon/            # UI resources
-│   │   │   └── util/            # Utilities
-│   │   └── lib/                 # Dependencies
+│   ├── lib/
+│   ├── save/
+│   ├── src/
 │   └── README.md
-│
-└── README.md                    # This file
+├── LICENSE
+└── README.md
 ```
 
-## 🔧 Common Requirements
+## Projects
 
-- **Java**: JDK 8 or higher
-- **Build Tool**: Maven or IDE with built-in compiler
-- **IDE**: IntelliJ IDEA or Eclipse recommended
+### DictionaryGame
 
-## 📚 Documentation
+`DictionaryGame` is a client-server dictionary application using raw TCP sockets and JSON messages. A Swing-based server manages the shared dictionary file and handles multiple clients concurrently through a custom thread pool. Clients connect through a Swing UI and can query, add, delete, append meanings, and update meanings for dictionary entries.
 
-Each game includes its own detailed README with setup instructions, usage guide, and architecture documentation. Start here:
+See `DictionaryGame/README.md` for setup and run instructions.
 
-- [DictionaryGame README](./DictionaryGame/README.md) - TCP socket-based architecture
-- [WhiteBoardGame README](./WhiteBoardGame/README.md) - RMI-based architecture
+### WhiteBoardGame
 
-## 🎓 Educational Value
+`WhiteBoardGame` is a shared whiteboard system using Java RMI. One user acts as the manager, hosts the session, approves join requests, and can save or load whiteboard state. Guests join remotely, draw on the same canvas, and exchange chat messages in real time.
 
-This project is suitable for:
-- Learning distributed systems concepts
-- Understanding different networking approaches (sockets vs RMI)
-- Multi-threading and concurrency in Java
-- GUI development with Swing
-- Network protocol design
+See `WhiteBoardGame/README.md` for setup and run instructions.
 
-## 📝 License
+## Common Requirements
 
-See [LICENSE](./LICENSE) for details.
+- JDK 8 or newer
+- A desktop environment capable of running Swing
+- Gson 2.10.1, already included under each game's `lib/` directory
 
-## 👨‍💻 Development Notes
+## How To Work With This Repo
 
-Both applications were developed as academic coursework to demonstrate distributed system design patterns:
+Each game is self-contained and can be compiled independently. The projects were originally developed in an IDE-centric workflow, so Eclipse and IntelliJ metadata are present, but both games can also be built from the command line with `javac` and run with `java`.
 
-- **DictionaryGame**: Emphasizes traditional client-server architecture with custom thread pool management
-- **WhiteBoardGame**: Showcases Java RMI for building distributed objects with real-time collaboration
+Recommended order if you are exploring the repository for the first time:
 
-For detailed architecture information, refer to individual README files for each game.
+1. Start with `DictionaryGame/README.md` for the socket-based example.
+2. Then review `WhiteBoardGame/README.md` for the RMI-based example.
+3. Compare the two designs to see how the communication model changes the server, client, and synchronization logic.
+
+## What Each Project Demonstrates
+
+- TCP request/response messaging with a shared persistent data store
+- Java RMI remote interfaces and callback-based updates
+- Swing GUI development for both client and host applications
+- Concurrency primitives such as thread-safe collections, atomics, and worker pools
+- State synchronization for multi-user desktop applications
+
+## License
+
+The repository is distributed under the terms in `LICENSE`.
